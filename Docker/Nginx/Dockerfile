@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:latest - 1.0.0 / 1.1.0
 
 RUN apk add --no-cache openssl
 
@@ -13,7 +13,7 @@ RUN openssl x509 -req -sha256 -days 365 -in cert.csr -signkey cert.key -out cert
 FROM alpine:latest AS get-under-maintenance
 RUN curl git.mondomaine.net/site-under-maintenance.html /src/nginx/public/
 
-FROM nginx:1.15-alpine
+FROM monimage:1
 
 RUN mkdir -p /etc/nginx/ssl/
 COPY --from=0 cert.key cert.crt /etc/nginx/ssl/
